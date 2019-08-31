@@ -1,0 +1,23 @@
+{
+  "name": "@futuretense/herumi-bls",
+  "version": "0.0.1",
+  "description": "BLS signatures using the BN-254 curve of Herumi/BLS",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Johan Stén <johan@futuretense.io>",
+  "license": "MIT",
+  "dependencies": {
+    "@futuretense/milagro-crypto-js": "0.0.1",
+    "buffer-reverse": "^1.0.1",
+    "js-sha256": "^0.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.2",
+    "typescript": "^3.6.2"
+  }
+}
