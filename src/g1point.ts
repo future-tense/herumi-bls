@@ -120,6 +120,8 @@ function hashAndMapToG1(message): ECP {
             return P;
         }
     }
+
+    throw {};
 }
 
 const fpOne = new FP(1);
