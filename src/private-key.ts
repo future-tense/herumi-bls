@@ -37,4 +37,12 @@ export class PrivateKey {
         const sk = secureRandom(32, {type: 'Buffer'});
         return PrivateKey.fromSeed(sk);
     }
+
+    static add(x: PrivateKey[]): PrivateKey {
+        const s = Scalar.copy(x[0].s);
+        for (let t of x.slice(1)) {
+            s.add(t.s);
+        }
+        return new PrivateKey(s);
+    }
 }

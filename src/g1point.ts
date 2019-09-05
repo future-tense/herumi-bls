@@ -26,6 +26,15 @@ export class G1Point {
         return reverse(buf2);
     }
 
+    static copy(from: G1Point): G1Point {
+        return new G1Point(from.p);
+    }
+
+    add(x: G1Point): G1Point {
+        this.p.add(x.p);
+        return this;
+    }
+
     static fromBuffer(buf: Buffer): G1Point {
         const buf2 = reverse(buf);
         const yIsOdd = buf2[0] > 127;

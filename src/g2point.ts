@@ -41,6 +41,14 @@ export class G2Point {
         return new this(P);
     }
 
+    static copy(from: G2Point): G2Point {
+        return new G2Point(from.p);
+    }
+
+    add(x: G2Point): G2Point {
+        this.p.add(x.p);
+        return this;
+    }
 
     static scalarMult(scalar: Scalar, point: G2Point): G2Point {
         const p = ECP2.mul(point.p, scalar.s);

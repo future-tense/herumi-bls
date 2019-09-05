@@ -6,7 +6,7 @@ import { Signature } from './signature';
 
 export class PublicKey {
 
-    readonly p: G2Point;
+    p: G2Point;
 
     constructor(p: G2Point) {
         this.p = p;
@@ -34,5 +34,13 @@ export class PublicKey {
     static fromBuffer(buf: Buffer) {
         const p = G2Point.fromBuffer(buf);
         return new PublicKey(p);
+    }
+
+    static add(x: PublicKey[]): PublicKey {
+        const s = G2Point.copy(x[0].p);
+        for (let t of x.slice(1)) {
+            s.add(t.p);
+        }
+        return new PublicKey(s);
     }
 }
