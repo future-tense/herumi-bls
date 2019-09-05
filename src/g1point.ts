@@ -69,7 +69,7 @@ function hashAndMapToG1(message): ECP {
     const hash = sha256.array(message);
     const s = maskedBigFromArray(hash);
     const t = new FP(s);
-    const negative = t.jacobi() < 0;
+    const isNegative = t.jacobi() < 0;
     const w = new FP(t)
         .sqr()
         .add(curveB)
@@ -100,7 +100,7 @@ function hashAndMapToG1(message): ECP {
         let y = getWeierstrass(x);
         if (y.jacobi() >= 0) {
             y = y.sqrt();
-            if (negative) {
+            if (isNegative) {
                 y = y.neg();
             }
 
