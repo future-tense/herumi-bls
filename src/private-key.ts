@@ -17,6 +17,16 @@ export class PrivateKey {
         return new Signature(sig);
     }
 
+    toBuffer(): Buffer {
+        return this.s.toBuffer();
+    }
+
+    static fromSeed(buf: Buffer): PrivateKey {
+        const b = maskedBigFromArray(buf);
+        const s = new Scalar(b);
+        return new this(s);
+    }
+
     static fromBuffer(buf: Buffer): PrivateKey {
         const s = Scalar.fromBuffer(buf);
         return new this(s);
