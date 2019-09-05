@@ -18,6 +18,7 @@ export class G1Point {
     }
 
     toBuffer(): Buffer {
+        this.p.affine();
         const yIsOdd = this.p.y.isodd();
         const buf2 = Buffer.alloc(32);
         this.p.x.redc().toBytes(buf2);
