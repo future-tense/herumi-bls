@@ -128,4 +128,3 @@ const fpOne = new FP(1);
 const curveB = new FP(2);
 const C1 = new FP(BIG.fromBytes(Buffer.from('252364824000000126cd890000000003cf0f0000000000060c00000000000004', 'hex')));
 const C2 = new FP(BIG.fromBytes(Buffer.from('25236482400000017080eb4000000006181800000000000cd98000000000000b', 'hex')));
-
