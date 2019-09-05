@@ -2,7 +2,7 @@ import { FP12, PAIR } from '@futuretense/milagro-crypto-js';
 import { G2Point } from './g2point';
 import { G1Point } from './g1point';
 
-type Pairing = typeof FP12;
+type Pairing = FP12;
 
 export function pairing(
     x: G2Point,
