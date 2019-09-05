@@ -1,6 +1,6 @@
+import { FP12, PAIR } from '@futuretense/milagro-crypto-js';
 import { G2Point } from './g2point';
 import { G1Point } from './g1point';
-import { FP12, PAIR } from './ctx';
 
 type Pairing = typeof FP12;
 
