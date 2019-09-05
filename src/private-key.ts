@@ -1,3 +1,4 @@
+import * as secureRandom from 'secure-random';
 import { Scalar} from './scalar';
 import { G1Point } from './g1point';
 import { Signature } from './signature';
@@ -30,5 +31,10 @@ export class PrivateKey {
     static fromBuffer(buf: Buffer): PrivateKey {
         const s = Scalar.fromBuffer(buf);
         return new this(s);
+    }
+
+    static random(): PrivateKey {
+        const sk = secureRandom(32, {type: 'Buffer'});
+        return PrivateKey.fromSeed(sk);
     }
 }
