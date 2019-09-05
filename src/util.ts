@@ -1,7 +1,5 @@
 import * as reverse from 'buffer-reverse';
-import { BIG } from './ctx';
-
-type BIG = typeof BIG;
+import { BIG } from '@futuretense/milagro-crypto-js';
 
 export function maskedBigFromArray(
     x: Buffer | number[]

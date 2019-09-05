@@ -1,9 +1,5 @@
 import * as reverse from 'buffer-reverse';
-import { BIG, ECP2, FP2, PAIR } from './ctx';
-
-type BIG = typeof BIG;
-type ECP2 = typeof ECP2;
-type FP2 = typeof FP2;
+import { BIG, ECP2, FP2 } from '@futuretense/milagro-crypto-js';
 
 export class G2Point {
 

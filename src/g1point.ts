@@ -1,11 +1,7 @@
 import { sha256 } from 'js-sha256';
 import * as reverse from 'buffer-reverse';
-import { BIG, ECP, FP, PAIR } from './ctx';
+import { BIG, ECP, FP } from '@futuretense/milagro-crypto-js';
 import { maskedBigFromArray } from './util';
-
-type BIG = typeof BIG;
-type ECP = typeof ECP;
-type FP = typeof FP;
 
 export class G1Point {
 
