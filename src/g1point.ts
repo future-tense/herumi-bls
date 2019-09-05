@@ -2,6 +2,7 @@ import { sha256 } from 'js-sha256';
 import * as reverse from 'buffer-reverse';
 import { BIG, ECP, FP } from '@futuretense/milagro-crypto-js';
 import { maskedBigFromArray } from './util';
+import { Scalar} from './scalar';
 
 export class G1Point {
 
@@ -11,8 +12,9 @@ export class G1Point {
         this.p = p;
     }
 
-    static scalarMult(scalar: BIG, point: G1Point): G1Point {
-        return new this(PAIR.G1mul(point.p, scalar));
+    static scalarMult(scalar: Scalar, point: G1Point): G1Point {
+        const p = ECP.mul(point.p, scalar.s);
+        return new this(p);
     }
 
     toBuffer(): Buffer {

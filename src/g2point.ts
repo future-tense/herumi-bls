@@ -1,5 +1,6 @@
 import * as reverse from 'buffer-reverse';
 import { BIG, ECP2, FP2 } from '@futuretense/milagro-crypto-js';
+import { Scalar} from './scalar';
 
 export class G2Point {
 
@@ -40,8 +41,10 @@ export class G2Point {
         return new this(P);
     }
 
-    static scalarMult(scalar: BIG, point: G2Point): G2Point {
-        return new this(PAIR.G2mul(point.p, scalar));
+
+    static scalarMult(scalar: Scalar, point: G2Point): G2Point {
+        const p = ECP2.mul(point.p, scalar.s);
+        return new this(p);
     }
 }
 

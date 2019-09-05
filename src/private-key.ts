@@ -1,12 +1,13 @@
+import { Scalar} from './scalar';
 import { G1Point } from './g1point';
 import { Signature } from './signature';
 import { maskedBigFromArray } from './util';
 
 export class PrivateKey {
 
-    readonly s: BIG;
+    s: Scalar;
 
-    constructor(s: BIG) {
+    constructor(s: Scalar) {
         this.s = s;
     }
 
@@ -17,7 +18,7 @@ export class PrivateKey {
     }
 
     static fromBuffer(buf: Buffer): PrivateKey {
-        const s = maskedBigFromArray(buf);
+        const s = Scalar.fromBuffer(buf);
         return new this(s);
     }
 }
