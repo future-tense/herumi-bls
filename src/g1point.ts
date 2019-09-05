@@ -16,16 +16,16 @@ export class G1Point {
     }
 
     toBuffer(): Buffer {
-        const yIsOdd = this.p.y.redc().lastbits(1);
+        const yIsOdd = this.p.y.isodd();
         const buf2 = Buffer.alloc(32);
-        this.p.x.redc().toBytes(buf2, 32);
-        buf2[0] |= yIsOdd << 7;
+        this.p.x.redc().toBytes(buf2);
+        buf2[0] |= Number(yIsOdd) << 7;
         return reverse(buf2);
     }
 
     static fromBuffer(buf: Buffer): G1Point {
         const buf2 = reverse(buf);
-        const yIsOdd = buf2[0] >> 7;
+        const yIsOdd = buf2[0] > 127;
         buf2[0] &= 0x7f;
 
         const a = BIG.fromBytes(buf2);
@@ -44,15 +44,14 @@ export class G1Point {
     }
 }
 
-function getYFromX(x: FP, yIsOdd: number): FP {
+function getYFromX(x: FP, yIsOdd: boolean): FP {
     let y = getWeierstrass(x);
     if (y.jacobi() < 0) {
         throw {};
     }
 
     y = y.sqrt();
-    const yIsOdd2 = y.redc().lastbits(1);
-    if (yIsOdd2 ^ yIsOdd) {
+    if (y.isodd() !== yIsOdd) {
         y = y.neg();
     }
 

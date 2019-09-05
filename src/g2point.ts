@@ -16,8 +16,8 @@ export class G2Point {
         this.p.x.a.redc().toBytes(a);
         this.p.x.b.redc().toBytes(b);
 
-        const yIsOdd = this.p.y.a.redc().lastbits(1);
-        b[0] |= yIsOdd << 7;
+        const yIsOdd = this.p.y.isodd();
+        b[0] |= Number(yIsOdd) << 7;
 
         return reverse(Buffer.concat([b, a]));
     }
@@ -25,7 +25,7 @@ export class G2Point {
     static fromBuffer(buf: Buffer): G2Point {
 
         const buf2 = reverse(buf);
-        const yIsOdd = buf2[0] >> 7;
+        const yIsOdd = buf2[0] > 127;
         buf2[0] &= 0x7f;
 
         const b = BIG.frombytearray(buf2, 0);
@@ -45,16 +45,14 @@ export class G2Point {
     }
 }
 
-function getYFromX(x: FP2, yIsOdd: number): FP2 {
+function getYFromX(x: FP2, yIsOdd: boolean): FP2 {
     let y = getWeierstrass(x);
-
     const ok = y.sqrt();
     if (!ok) {
         throw {};
     }
 
-    const yIsOdd2 = y.a.redc().lastbits(1);
-    if (yIsOdd2 !== yIsOdd) {
+    if (y.isodd() !== yIsOdd) {
         y.neg();
     }
 
